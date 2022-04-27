@@ -115,7 +115,7 @@ def flatten_record(d, parent_key=[], sep='__'):
         if isinstance(v, collections.MutableMapping):
             items.extend(flatten_record(v, parent_key + [k], sep=sep).items())
         else:
-            items.append((new_key, json.dumps(v) if type(v) is list else v))
+            items.append((new_key, json.dumps(v, default=decimal_default_proc) if type(v) is list else v))
     return dict(items)
 
 
@@ -143,3 +143,7 @@ def get_target_key(message, prefix=None, timestamp=None, naming_convention=None)
         filename = key.split('/')[-1]
         key = key.replace(filename, f'{prefix}{filename}')
     return key
+
+def decimal_default_proc(obj):
+    if isinstance(obj, Decimal):
+        return float(obj)
