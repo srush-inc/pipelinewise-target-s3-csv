@@ -18,14 +18,14 @@ setup(name="pipelinewise-target-s3-csv",
       ],
       py_modules=["target_s3_csv"],
       install_requires=[
-          'pipelinewise-singer-python==1.*',
+          'pipelinewise-singer-python>=1,<3',
           'inflection==0.5.1',
-          'boto3==1.17.39',
+          'boto3==1.21.46',
       ],
       extras_require={
           "test": [
-              'pylint==2.10.*',
-              'pytest==6.2.*',
+              'pylint>=2.10,<2.14',
+              'pytest>=6.2,<7.2',
               'pytest-cov>=2.12,<3.1',
           ]
       },
